@@ -31,7 +31,7 @@ if [ -z "$BRANCH" ]; then
 fi
 
 if git rev-parse --abbrev-ref --symbolic-full-name "@{u}" >/dev/null 2>&1; then
-  git push
+  git push </dev/null
 else
-  git push -u origin "$BRANCH"
+  git push -u origin "$BRANCH" </dev/null
 fi
