@@ -2,7 +2,7 @@
 set -eu
 
 DOCS_DIR="MD"
-DOCS_REMOTE_URL="git@github.com:abdulmoizz44/moizz.git"
+DOCS_REMOTE_URL="https://github.com/abdulmoizz44/moizz.git"
 
 if [ ! -d "$DOCS_DIR/.git" ]; then
   echo "pre-push: $DOCS_DIR is not a Git repository; skipping docs push."
