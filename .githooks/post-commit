@@ -1,0 +1,27 @@
+#!/bin/sh
+set -eu
+
+DOCS_DIR="MD"
+
+if [ ! -d "$DOCS_DIR/.git" ]; then
+  echo "post-commit: $DOCS_DIR is not a Git repository; skipping docs sync."
+  exit 0
+fi
+
+cd "$DOCS_DIR"
+
+git add -A
+
+if git diff --cached --quiet; then
+  echo "post-commit: no docs changes to commit."
+  exit 0
+fi
+
+MAIN_COMMIT="$(git -C .. rev-parse --short HEAD 2>/dev/null || true)"
+MESSAGE="Sync docs"
+
+if [ -n "$MAIN_COMMIT" ]; then
+  MESSAGE="$MESSAGE from main commit $MAIN_COMMIT"
+fi
+
+git commit -m "$MESSAGE"
